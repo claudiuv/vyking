@@ -1,0 +1,58 @@
+info:
+  contact: {}
+  description: This a RestAPI for an iGaming platform.
+  version: "1.0"
+paths:
+  /api/v1/distributePrize:
+    post:
+      description: This endpoint triggers a stored procedure to distribute prizes
+        among players based on their rankings in the specified tournament.
+      parameters:
+      - description: ID of the tournament
+        in: query
+        name: tournamentID
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Prizes distributed successfully
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid Tournament ID
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Distribute prizes for a tournament
+      tags:
+      - Prizes
+  /api/v1/rankings:
+    get:
+      description: This endpoint generates a ranking report based on players' account
+        balances in descending order.
+      responses:
+        "200":
+          description: List of players with their rankings
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Fetch player rankings
+      tags:
+      - Rankings
+swagger: "2.0"
